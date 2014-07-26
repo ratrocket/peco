@@ -86,6 +86,14 @@ brew install peco
 
 ![optimized](http://peco.github.io/images/peco-demo-homebrew.gif)
 
+### Windows (Chocolatey NuGet Users)
+
+There's a third-party [peco package available](https://chocolatey.org/packages/peco) for Chocolatey NuGet.
+
+```
+C:\> choco install peco
+```
+
 ### go get
 
 If you want to go the Go way (install in GOPATH/bin) and just want the command:
@@ -330,9 +338,10 @@ For now, styles of following 5 items can be customized in `config.json`.
 
 ### Attributes
 
-- `"bold"` for `termbox.AttrBold`
-- `"underline"` for `termbox.AttrUnderline`
-- `"blink"` for `termbox.AttrReverse`
+- `"bold"` for fg: `termbox.AttrBold`
+- `"underline"` for fg: `termbox.AttrUnderline`
+- `"reverse"` for fg: `termbox.AttrReverse`
+- `"on_bold"` for bg: `termbox.AttrBold` (this attribute actually makes the background blink on some platforms/environments, e.g. linux console, xterm...)
 
 ## CustomMatcher
 
@@ -381,9 +390,7 @@ First, fork this repo, and get your clone locally.
 3. Run `go get github.com/mattn/go-runewidth`
 4. Run `go get github.com/nsf/termbox-go`
 
-Note that we have a Godeps file in source tree, for now it's just there for a peace of mind. If you already know about [godep](https://github.com/tools/godep), when you may use that instead of steps 2~4
-
-In this repository, `master` branch is always the stable branch. `master` will *only* be merged from `devel` branch after the `devel` branch has been deemed stable enough to be merged to master
+Note that we have a Godeps file in source tree, for now it's just there for a peace of mind. If you already know about [godep](https://github.com/tools/godep), then you may use that instead of steps 2~4
 
 Then from the root of this repository run:
 
@@ -404,24 +411,31 @@ AUTHORS
 =======
 
 * Daisuke Maki (lestrrat)
+* mattn
+* syohex
+
+CONTRIBUTORS
+============
+
 * HIROSE Masaaki
 * Joel Segerlind
 * Lukas Lueg
 * Mitsuoka Mimura
 * Ryota Arai
 * Shinya Ohyanagi
-* syohex
 * Takashi Kokubun
 * Yuya Takeyama
 * cho45
 * cubicdaiya
 * kei\_q
-* mattn
 * negipo
 * sugyan
 * swdyh
 * MURAOKA Taro (kaoriya/koron), for aho-corasick search
 * taichi, for the gif working on Windows
+* uobikiemukot
+* Samuel Lemaitre
+* Yousuke Ushiki
 
 Notes
 =====

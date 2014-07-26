@@ -15,15 +15,15 @@ var homedirFunc = homedir
 // Config holds all the data that can be configured in the
 // external configuran file
 type Config struct {
-	Action        map[string][]string `json:"Action"`
+	Action map[string][]string `json:"Action"`
 	// Keymap used to be directly responsible for dispatching
 	// events against user input, but since then this has changed
 	// into something that just records the user's config input
 	Keymap        map[string]string `json:"Keymap"`
-	Matcher       string   `json:"Matcher"`
-	Style         StyleSet `json:"Style"`
+	Matcher       string            `json:"Matcher"`
+	Style         StyleSet          `json:"Style"`
 	CustomMatcher map[string][]string
-	Prompt        string   `json:"Prompt"`
+	Prompt        string `json:"Prompt"`
 }
 
 // NewConfig creates a new Config
@@ -76,10 +76,13 @@ var (
 		"on_cyan":    termbox.ColorCyan,
 		"on_white":   termbox.ColorWhite,
 	}
-	stringToAttr = map[string]termbox.Attribute{
+	stringToFgAttr = map[string]termbox.Attribute{
 		"bold":      termbox.AttrBold,
 		"underline": termbox.AttrUnderline,
-		"blink":     termbox.AttrReverse,
+		"reverse":   termbox.AttrReverse,
+	}
+	stringToBgAttr = map[string]termbox.Attribute{
+		"on_bold": termbox.AttrBold,
 	}
 )
 
@@ -138,9 +141,12 @@ func stringsToStyle(raw []string) *Style {
 	}
 
 	for _, s := range raw {
-		attr, ok := stringToAttr[s]
-		if ok {
-			style.fg |= attr
+		if fgAttr, ok := stringToFgAttr[s]; ok {
+			style.fg |= fgAttr
+		}
+
+		if bgAttr, ok := stringToBgAttr[s]; ok {
+			style.bg |= bgAttr
 		}
 	}
 
